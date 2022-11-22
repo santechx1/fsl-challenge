@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fsl-secret
+type: Opaque
+data:
+  MY_SECRET: On3H1torL3sS
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fsl-deployment
+  labels:
+    app: fsl
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fsl
+
+  template:
+    metadata:
+      labels:
+        app: fsl
+    spec:
+      containers:
+        - name: fsl-challenge
+          image: 046097630868.dkr.ecr.us-east-1.amazonaws.com/fsl-challenge:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: fsl-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fsl-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: fsl
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
