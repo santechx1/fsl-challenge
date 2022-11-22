@@ -23,7 +23,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - run: npm ci
       - run: npm run lint
-      - run: npm install prettier & npm run prettier
+      - run: npm run prettier
       - run: CI=true npm run test
       - run: npm run build
       - name: Build, tag, and push docker image to Amazon ECR
