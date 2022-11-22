@@ -1,4 +1,4 @@
-name: Node.js CI
+name: CI CD Workflow
 
 on:
   pull_request:
