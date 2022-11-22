@@ -2,4 +2,8 @@
 
 cd infra
 npm install
-npm run cdk deploy -- --require-approval never
+npx cdk bootstrap \
+    --profile 046097630868_AdministratorAccess \
+    --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess \
+    aws://046097630868/us-east-1
+npx cdk deploy
