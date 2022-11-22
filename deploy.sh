@@ -2,4 +2,4 @@
 
 cd infra
 npm install
-npm cdk deploy -- --require-approval never
+npm run cdk deploy -- --require-approval never
